@@ -1,3 +1,6 @@
+//ALUNOS:
+//LUCAS SANTOS E JOYCE AVELINO
+
 import java.util.Scanner;
 
 public class main {
@@ -29,7 +32,7 @@ public class main {
 	    	System.out.println();
 	    	
 	    	do {
-	    		System.out.println("Posição de " + jogador1.getNome());
+	    		System.out.println("Posição de " + jogador1.getNome() + "(X)");
 	    		posicao = leitor.nextLine();
 	    		
 	    		while(!jogo.ValidaPosicao(posicao, tabuleiro.getMatriz())) {
@@ -40,7 +43,7 @@ public class main {
 	    	    	jogo.mostrarMatriz(tabuleiro.getMatriz());
 	    	    	System.out.println();
 	    	    	
-	    			System.out.println("Posição jogador 1: ");
+	    			System.out.println("Posição de " + jogador1.getNome());
 		    		posicao = leitor.nextLine();
 		    		valida = 0;
 	    		}
@@ -57,7 +60,7 @@ public class main {
 	    	}
 	    	////////////////////////////////jogador2////////////////////////////////////////////////
 	    	do {
-	    		System.out.println("Posição de " + jogador2.getNome());
+	    		System.out.println("Posição de " + jogador2.getNome() + "(O)");
 	    		posicao = leitor.nextLine();
 	    		
 	    		while(!jogo.ValidaPosicao(posicao, tabuleiro.getMatriz())) {

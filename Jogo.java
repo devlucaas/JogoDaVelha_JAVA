@@ -1,7 +1,7 @@
-import javax.swing.JOptionPane;
-
-import java.util.Scanner;
 public class Jogo{
+
+    Jogador jogador1 = new Jogador();
+    Jogador jogador2 = new Jogador();
     
     public String mostrarMatriz(String matriz[][]){
         for (int i=0; i<3; i++){
@@ -77,10 +77,10 @@ public class Jogo{
             
             for(int i = 0; i<vetor.length; i++) {
                 if(vetor[i].equalsIgnoreCase("XXX")) {
-                    ganhador = "o Jogador 1 ganhou";
+                    ganhador = "Primeiro Jogador Ganhou!!";
                 }
                 else if(vetor[i].equalsIgnoreCase("OOO")) {
-                    ganhador = "o Jogador 2 ganhou";
+                    ganhador = "Segundo Jogador Ganhou";
                 }
             
             }
