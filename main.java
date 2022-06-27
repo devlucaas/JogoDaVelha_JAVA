@@ -2,6 +2,7 @@
 //LUCAS SANTOS E JOYCE AVELINO
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.*;
 
 public class main {
 	
@@ -13,32 +14,44 @@ public class main {
       Jogador jogador2 = new Jogador(); 
 	  Maquina maquina = new Maquina();
       Jogo jogo = new Jogo();
-
+	  ImageIcon icon = new ImageIcon("jogovelha_img.png");
+	  
       String posicao;
 	  int opc;
 	  int valida = 0;
 	  int contJogadas = 0;
-	  String novamente = "sim";
+	  int novamente = 0;
+	  String vencedorComMaquina = "";
+	  String vencedor = "";
+	  String[][] interfaceTabuleiro;
+
 	  
-		
-		//jogo.modoJogo();
-		//jogo.players(jogador1, jogador2);
 		do{
+		interfaceTabuleiro = jogo.mostrarMatriz(tabuleiro.getMatriz());
+
+		JOptionPane.showMessageDialog(null, interfaceTabuleiro, "JOGO DA VELHA", JOptionPane.INFORMATION_MESSAGE, icon);
+			
 		jogo.modoJogo();
+		
+		//new Interface();
 
 		//---CASO ESCOLHIDO SEJA SINGLEPLAYER
 		if(jogo.opcao == 1){ 
+			
 			jogo.playersMaquina(jogador1, maquina);
 			System.out.print("--JOGO DA VELHA--\n");
 			while(true) {
 				
 				System.out.println();
-				jogo.mostrarMatriz(tabuleiro.getMatriz());
+				
+				//JOptionPane.showMessageDialog(null, jogo.mostrarMatriz(tabuleiro.getMatriz()));
+				
 				System.out.println();
 				
 				do {
-					System.out.println("Posição de " + jogador1.getNome() + "(X)");
-					posicao = leitor.nextLine();
+					posicao = JOptionPane.showInputDialog(null, "Posicão de " + jogador1.getNome() + "(X)");
+					//System.out.println("Posição de " + jogador1.getNome() + "(X)");
+					//posicao = leitor.nextLine();
 					
 					while(!jogo.ValidaPosicao(posicao, tabuleiro.getMatriz())) {
 						System.out.println("Posição inválida, escolha outra jogada.");
@@ -48,8 +61,7 @@ public class main {
 						jogo.mostrarMatriz(tabuleiro.getMatriz());
 						System.out.println();
 						
-						System.out.println("Posição de " + jogador1.getNome());
-						posicao = leitor.nextLine();
+						posicao = JOptionPane.showInputDialog(null, "Posicão de " + jogador1.getNome() + "(X)");
 						valida = 0;
 					}
 					jogo.Jogar(posicao, tabuleiro.getMatriz(), jogador1.getSimbolo());
@@ -60,7 +72,8 @@ public class main {
 				contJogadas ++;
 				valida = 0;
 				
-				if(!jogo.VencedorComMaquina(contJogadas, tabuleiro.getMatriz(), jogador1, maquina).equals("null")) {
+				vencedorComMaquina = jogo.VencedorComMaquina(contJogadas, tabuleiro.getMatriz(), jogador1, maquina);
+				if(!vencedorComMaquina.equals("null")) {
 					break;
 				}
 				////////////////////////////////MAQUINA////////////////////////////////////////////////
@@ -97,16 +110,18 @@ public class main {
 				contJogadas ++;
 				valida = 0;
 				
-				if(!jogo.VencedorComMaquina(contJogadas, tabuleiro.getMatriz(), jogador1, maquina).equals("null")) {
+				if(!vencedorComMaquina.equals("null")) {
 					break;
 				}
 		   }
-			System.out.println("GANHADOR: " + jogo.VencedorComMaquina(contJogadas, tabuleiro.getMatriz(), jogador1, maquina) );
-			System.out.println(jogo.VencedorComMaquina(contJogadas, tabuleiro.getMatriz(), jogador1, maquina)+" TEM " + jogo.pontos + " PONTOS(S)" );
+			System.out.println("GANHADOR: " + vencedorComMaquina );
+			System.out.println(vencedorComMaquina +" TEM " + jogo.pontos + " PONTOS(S)" );
 
 		}
 
 		//----CASO ESCOLHIDO SEJA MULTIPLAYER
+
+		
 	  else if(jogo.opcao == 2){ 
 		  
 	  jogo.players(jogador1, jogador2);
@@ -119,8 +134,8 @@ public class main {
 	    	System.out.println();
 	    	
 	    	do {
-	    		System.out.println("Posição de " + jogador1.getNome() + "(X)");
-	    		posicao = leitor.nextLine();
+	    		posicao = JOptionPane.showInputDialog(null, "Posicão de " + jogador1.getNome() + "(X)");
+	  
 	    		
 	    		
 	    		while(!jogo.ValidaPosicao(posicao, tabuleiro.getMatriz())) {
@@ -131,8 +146,8 @@ public class main {
 	    	    	jogo.mostrarMatriz(tabuleiro.getMatriz());
 	    	    	System.out.println();
 	    	    	
-	    			System.out.println("Posição de " + jogador1.getNome() + "(X)");
-		    		posicao = leitor.nextLine();
+	    			posicao = JOptionPane.showInputDialog(null, "Posicão de " + jogador1.getNome() + "(X)");
+		  
 		    		valida = 0;
 	    		}
 	    		jogo.Jogar(posicao, tabuleiro.getMatriz(), jogador1.getSimbolo());
@@ -148,15 +163,16 @@ public class main {
 	    	contJogadas ++;
 	    	valida = 0;
 	    	
-	    	if(!jogo.Vencedor(contJogadas, tabuleiro.getMatriz(), jogador1, jogador2).equals("null")) {
+			vencedor = jogo.Vencedor(contJogadas, tabuleiro.getMatriz(), jogador1, jogador2);
+
+	    	if(!vencedor.equals("null")) {
 	    		break;
 	    	}
 	    	
 	    	////////////////////////////////jogador2////////////////////////////////////////////////
 	    	
 	    	do {
-	    		System.out.println("Posição de " + jogador2.getNome() + "(O)");
-	    		posicao = leitor.nextLine();
+	    		posicao = JOptionPane.showInputDialog(null, "Posicão de " + jogador2.getNome() + "(X)");
 	    		
 	    		while(!jogo.ValidaPosicao(posicao, tabuleiro.getMatriz())) {
 	    			System.out.println("Posição inválida, escolha outra jogada.");
@@ -166,8 +182,8 @@ public class main {
 	    	    	jogo.mostrarMatriz(tabuleiro.getMatriz());
 	    	    	System.out.println();
 	    	    	
-	    			System.out.println("Posição de " + jogador2.getNome() + "(O)");
-		    		posicao = leitor.nextLine();
+	    			posicao = JOptionPane.showInputDialog(null, "Posicão de " + jogador2.getNome() + "(X)");
+	    		
 		    		valida = 0;
 	    		}
 	    		jogo.Jogar(posicao, tabuleiro.getMatriz(), jogador2.getSimbolo());
@@ -179,19 +195,21 @@ public class main {
 	    	contJogadas ++;
 	    	valida = 0;
 	    	
-	    	if(!jogo.Vencedor(contJogadas, tabuleiro.getMatriz(), jogador1, jogador2).equals("null")) {
+	    	if(!vencedor.equals("null")) {
 	    		break;
 	    	}
 	    	
 	   }
        
-	   System.out.println("GANHADOR: " + jogo.Vencedor(contJogadas, tabuleiro.getMatriz(), jogador1, jogador2) );
-	   System.out.println(jogo.Vencedor(contJogadas, tabuleiro.getMatriz(), jogador1, jogador2)+" TEM " + jogo.pontos + " PONTOS(S)" );
+	   JOptionPane.showMessageDialog(null, "GANHADOR: " + vencedor);
+	   
+	   JOptionPane.showMessageDialog(null, vencedor +" TEM " + jogo.pontos + " PONTOS(S)" );
 
-	   System.out.println("Gostaria de jogar novamente? (sim ou nao)");
-	   novamente = leitor.nextLine();
+	   
+	   novamente = JOptionPane.showConfirmDialog(null, "Gostaria de jogar novamente? (sim ou nao)");
 		}
 		
-		}while(novamente.equalsIgnoreCase("sim"));
-	}	
+		}while(novamente == 0);
+	}
+
 }

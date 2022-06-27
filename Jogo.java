@@ -1,5 +1,8 @@
+
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
+
 public class Jogo{
     
 
@@ -10,11 +13,12 @@ public class Jogo{
     int pontos = 0;
     int opcao = 0;
     int numero;
+    String nome;
     Scanner entrada = new Scanner(System.in);
     
     public String name;
     
-    public String mostrarMatriz(String matriz[][]){
+    public String[][] mostrarMatriz(String matriz[][]){
         for (int i=0; i<3; i++){
             for (int j=0; j<3; j++){
                 System.out.print(matriz[i][j]);
@@ -22,7 +26,7 @@ public class Jogo{
              }
               System.out.println();
          }
-         return null;
+            return tabuleiro.getMatriz();
     }
 
     public boolean ValidaPosicao(String posicao, String matriz[][]){
@@ -39,12 +43,7 @@ public class Jogo{
     public int modoJogo(){
         
         do{
-            System.out.println("---------------------------------------");
-			System.out.println("      ESCOLHA SEU MODO DE JOGO:");
-            System.out.println("---------------------------------------");
-			System.out.println("1 - SINGLEPLAYER");
-			System.out.println("2 - MULTIPLAYER");
-			opcao = entrada.nextInt();
+            opcao = Integer.parseInt(JOptionPane.showInputDialog(null,"ESCOLHA SEU MODO DE JOGO:\n1 - SINGLEPLAYER | 2 - MULTIPLAYER"));
             
             if(opcao != 1 && opcao != 2)
                 System.out.println("Opção inválida! Tente novamente");
@@ -55,22 +54,20 @@ public class Jogo{
     
     public void players(Jogador jogador1, Jogador jogador2){
         if(opcao == 1){
-            System.out.println("Jogador 1 digite seu nome:");
-            entrada.nextLine();
-            jogador1.setNome(entrada.nextLine());
-
+            nome = JOptionPane.showInputDialog(null, "Jogador 1 digite seu nome:");
+    
+            jogador1.setNome(nome);
             jogador1.setSimbolo("X");
             maquina.setSimboloMaquina("O");
         }
         else if(opcao == 2){
 
-            System.out.println("Jogador 1 digite seu nome:");
-            entrada.nextLine();
-            jogador1.setNome(entrada.nextLine());
+            nome = JOptionPane.showInputDialog(null, "Jogador 1 digite seu nome:");
+            jogador1.setNome(nome);
 
-            System.out.println("Jogador 2 digite seu nome:");
+            nome = JOptionPane.showInputDialog(null, "Jogador 2 digite seu nome:");
 
-            jogador2.setNome(entrada.nextLine());
+            jogador2.setNome(nome);
             
             jogador1.setSimbolo("X");
             jogador2.setSimbolo("O");
@@ -78,9 +75,8 @@ public class Jogo{
     }
     public void playersMaquina(Jogador jogador1, Maquina maquina){
       
-            System.out.println("Jogador 1 digite seu nome:");
-            entrada.nextLine();
-            jogador1.setNome(entrada.nextLine());
+            nome = JOptionPane.showInputDialog(null, "Jogador 1 digite seu nome:");
+            jogador1.setNome(nome);
 
             jogador1.setSimbolo("X");
             maquina.setSimboloMaquina("O");
@@ -219,14 +215,11 @@ public class Jogo{
             for(int i = 0; i<vetor.length; i++) {
                 if(vetor[i].equalsIgnoreCase("XXX")) {
                     ganhador = jogador1.getNome().toUpperCase();
-                    
-                    pontos +=1;
-                    System.out.println(pontos);
+                    pontos ++;
                 }
                 else if(vetor[i].equalsIgnoreCase("OOO")) {
                     ganhador = jogador2.getNome().toUpperCase();
-                    pontos +=1;
-                    System.out.println(pontos);
+                    pontos ++;
                 }
             }
         }
@@ -238,7 +231,7 @@ public class Jogo{
         
         String vetor[] = new String[8];
         String ganhador = "null";
-        if (numeroDeJogadas == 10) {
+        if (numeroDeJogadas == 9) {
             ganhador = "O jogo empatou";
         }
         else {
@@ -258,17 +251,22 @@ public class Jogo{
             for(int i = 0; i<vetor.length; i++) {
                 if(vetor[i].equalsIgnoreCase("XXX")) {
                     ganhador = jogador1.getNome().toUpperCase();
-                    pontos +=1;
-                    System.out.println(pontos);
+                    pontos ++;
+                    
                 }
                 else if(vetor[i].equalsIgnoreCase("OOO")) {
                     ganhador ="computador".toUpperCase();
-                    pontos +=1;
-                    System.out.println(pontos);
+                    pontos ++;
                     
                 }
             }
         }
         return ganhador;
     }
+    /*public void desejaContinuar(){
+        int continuar = JOptionPane.showConfirmDialog(null, "Deseja Continuar?", "FIM DE JOGO", JOptionPane.YES_NO_OPTION);
+        if(continuar == JOptionPane.YES_OPTION){
+
+        }
+    }*/
 }
