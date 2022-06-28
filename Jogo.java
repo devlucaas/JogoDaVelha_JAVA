@@ -18,15 +18,17 @@ public class Jogo{
     
     public String name;
     
-    public String[][] mostrarMatriz(String matriz[][]){
+    public String mostrarMatriz(String matriz[][]){
+        String result = "";
+
         for (int i=0; i<3; i++){
             for (int j=0; j<3; j++){
-                System.out.print(matriz[i][j]);
-                System.out.print (" | ");
+                result += matriz[i][j] + " | ";
+
              }
-              System.out.println();
+            result += "\n";
          }
-            return tabuleiro.getMatriz();
+            return result;
     }
 
     public boolean ValidaPosicao(String posicao, String matriz[][]){

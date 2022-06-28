@@ -23,7 +23,7 @@ public class main {
 	  int novamente = 0;
 	  String vencedorComMaquina = "";
 	  String vencedor = "";
-	  String[][] interfaceTabuleiro;
+	  String interfaceTabuleiro;
 
 	  
 		do{
