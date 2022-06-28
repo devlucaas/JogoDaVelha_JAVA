@@ -16,14 +16,15 @@ public class main {
       Jogo jogo = new Jogo();
 	  ImageIcon icon = new ImageIcon("jogovelha_img.png");
 	  
+	  String vencedor = "";
+	  String interfaceTabuleiro;
       String posicao;
 	  int opc;
 	  int valida = 0;
 	  int contJogadas = 0;
 	  int novamente = 0;
 	  String vencedorComMaquina = "";
-	  String vencedor = "";
-	  String interfaceTabuleiro;
+	  
 
 	  
 		do{
